@@ -17,7 +17,7 @@ def main():
     nft_repository = NFTRepository(storage_type='json')
 
     tiebreaker_strategy = AlphabeticalTieBreaker()
-    poll_service = PollService(poll_repository, tiebreaker_strategy)
+    poll_service = PollService(user_repository, tiebreaker_strategy)
     chatbot_service = ChatbotService()
     nft_service = NFTService(nft_repository)
 
