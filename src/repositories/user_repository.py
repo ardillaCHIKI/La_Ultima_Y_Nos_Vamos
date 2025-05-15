@@ -1,6 +1,6 @@
 import json
 import sqlite3
-from models.user import User
+from src.models.user import User
 
 class UserRepository:
     def __init__(self, storage_type='json', db_path='data/users.db', json_path='data/users.json'):

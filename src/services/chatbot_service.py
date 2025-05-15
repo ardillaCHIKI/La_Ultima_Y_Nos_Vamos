@@ -1,5 +1,5 @@
 from transformers import pipeline
-from services.poll_service import PollService
+from src.services.poll_service import PollService
 
 class ChatbotService:
     def __init__(self, poll_service: PollService):

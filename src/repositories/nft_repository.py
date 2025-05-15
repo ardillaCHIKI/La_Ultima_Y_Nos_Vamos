@@ -1,6 +1,6 @@
 import json
 import sqlite3
-from models.token_nft import TokenNFT
+from src.models.token_nft import TokenNFT
 
 class NFTRepository:
     def __init__(self, storage_type='json', db_path='data/nfts.db', json_path='data/nfts.json'):

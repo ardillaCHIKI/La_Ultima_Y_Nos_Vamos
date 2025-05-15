@@ -1,6 +1,6 @@
 import json
 import sqlite3
-from models.poll import Poll
+from src.models.poll import Poll
 
 class PollRepository:
     def __init__(self, storage_type='json', db_path='data/polls.db', json_path='data/polls.json'):

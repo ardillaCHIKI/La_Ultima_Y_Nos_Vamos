@@ -1,4 +1,4 @@
-from models.poll import Poll
+from src.models.poll import Poll
 
 class PollMultiple(Poll):
     def __init__(self, poll_id: str, question: str, options: list, duration: int):

@@ -1,6 +1,6 @@
-from models.poll import Poll
-from models.poll_multiple import PollMultiple
-from models.poll_weighted import PollWeighted
+from src.models.poll import Poll
+from src.models.poll_multiple import PollMultiple
+from src.models.poll_weighted import PollWeighted
 
 class PollFactory:
     @staticmethod

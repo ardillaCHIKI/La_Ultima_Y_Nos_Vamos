@@ -1,6 +1,6 @@
-from models.token_nft import TokenNFT
-from repositories.nft_repository import NFTRepository
-from patterns.observer import Observer
+from src.models.token_nft import TokenNFT
+from src.repositories.nft_repository import NFTRepository
+from src.patterns.observer import Observer
 
 class NFTService(Observer):
     def update(self, event: str, data: dict):

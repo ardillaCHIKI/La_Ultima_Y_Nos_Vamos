@@ -1,13 +1,13 @@
 import uuid
 from datetime import datetime
-from models.poll import Poll
-from models.vote import Vote
-from repositories.poll_repository import PollRepository
-from repositories.nft_repository import NFTRepository
-from repositories.user_repository import UserRepository
-from patterns.observer import Subject
-from patterns.strategy import TieBreakerStrategy
-from services.nft_service import NFTService
+from src.models.poll import Poll
+from src.models.vote import Vote
+from src.repositories.poll_repository import PollRepository
+from src.repositories.nft_repository import NFTRepository
+from src.repositories.user_repository import UserRepository
+from src.patterns.observer import Subject
+from src.patterns.strategy import TieBreakerStrategy
+from src.services.nft_service import NFTService
 
 class PollService(Subject):
     def __init__(self, poll_repository: PollRepository, nft_repository: NFTRepository, user_repository: UserRepository, tiebreaker_strategy: TieBreakerStrategy):

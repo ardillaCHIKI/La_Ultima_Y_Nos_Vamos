@@ -1,5 +1,5 @@
 # src/models/poll_weighted.py
-from models.poll import Poll
+from src.models.poll import Poll
 
 class PollWeighted(Poll):
     def __init__(self, poll_id: str, question: str, options: list, duration: int):

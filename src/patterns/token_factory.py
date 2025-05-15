@@ -1,4 +1,4 @@
-from models.token_nft import TokenNFT
+from src.models.token_nft import TokenNFT
 
 class TokenFactory:
     @staticmethod

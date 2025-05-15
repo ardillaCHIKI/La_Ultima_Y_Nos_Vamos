@@ -1,7 +1,7 @@
 # controllers/ui_controller.py
-from services.poll_service import PollService
-from services.chatbot_service import ChatbotService
-from services.nft_service import NFTService
+from src.services.poll_service import PollService
+from src.services.chatbot_service import ChatbotService
+from src.services.nft_service import NFTService
 
 class UIController:
     def __init__(self, poll_service: PollService, chatbot_service: ChatbotService, nft_service: NFTService):

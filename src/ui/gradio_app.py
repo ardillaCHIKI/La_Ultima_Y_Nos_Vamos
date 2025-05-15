@@ -1,5 +1,5 @@
 import gradio as gr
-from services.nft_service import NFTService
+from src.services.nft_service import NFTService
 class GradioApp:
     def __init__(self, nft_service: NFTService):
         self.nft_service = nft_service

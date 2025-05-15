@@ -1,7 +1,7 @@
 import hashlib
 import uuid
-from models.user import User
-from repositories.user_repository import UserRepository
+from src.models.user import User
+from src.repositories.user_repository import UserRepository
 
 class UserService:
     def __init__(self, user_repository: UserRepository):

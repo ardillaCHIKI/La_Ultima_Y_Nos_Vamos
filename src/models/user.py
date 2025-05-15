@@ -1,5 +1,5 @@
 # src/models/user.py
-from models.token_nft import TokenNFT
+from src.models.token_nft import TokenNFT
 class User:
     def __init__(self, username: str, password_hash: str):
         self.username = username
