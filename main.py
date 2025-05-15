@@ -1,5 +1,3 @@
-# main.py
-
 import argparse
 from scr.controllers.cli_controller import CLIController
 from scr.ui.gradio_app import GradioApp
