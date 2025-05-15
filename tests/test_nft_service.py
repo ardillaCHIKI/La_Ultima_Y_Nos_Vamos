@@ -1,6 +1,6 @@
 import pytest
-from scr.services.nft_service import NFTService
-from scr.repositories.nft_repository import NFTRepository
+from src.services.nft_service import NFTService
+from src.repositories.nft_repository import NFTRepository
 
 @pytest.fixture
 def nft_service():

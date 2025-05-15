@@ -1,8 +1,8 @@
 import pytest
-from scr.patterns.observer import Subject, Observer
-from scr.patterns.poll_factory import PollFactory
-from scr.models.poll_multiple import PollMultiple
-from scr.patterns.strategy import AlphabeticalTieBreaker, RandomTieBreaker
+from src.patterns.observer import Subject, Observer
+from src.patterns.poll_factory import PollFactory
+from src.models.poll_multiple import PollMultiple
+from src.patterns.strategy import AlphabeticalTieBreaker, RandomTieBreaker
 
 class MockObserver(Observer):
     def __init__(self):

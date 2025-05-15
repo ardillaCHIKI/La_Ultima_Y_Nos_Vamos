@@ -1,7 +1,7 @@
 import pytest
-from scr.services.chatbot_service import ChatbotService
-from scr.services.poll_service import PollService
-from scr.repositories.poll_repository import PollRepository
+from src.services.chatbot_service import ChatbotService
+from src.services.poll_service import PollService
+from src.repositories.poll_repository import PollRepository
 
 @pytest.fixture
 def chatbot_service():

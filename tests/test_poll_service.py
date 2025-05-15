@@ -1,9 +1,9 @@
 import pytest
-from scr.services.poll_service import PollService
-from scr.repositories.poll_repository import PollRepository
-from scr.repositories.nft_repository import NFTRepository
-from scr.repositories.user_repository import UserRepository
-from scr.patterns.strategy import AlphabeticalTieBreaker
+from src.services.poll_service import PollService
+from src.repositories.poll_repository import PollRepository
+from src.repositories.nft_repository import NFTRepository
+from src.repositories.user_repository import UserRepository
+from src.patterns.strategy import AlphabeticalTieBreaker
 
 @pytest.fixture
 def poll_service():

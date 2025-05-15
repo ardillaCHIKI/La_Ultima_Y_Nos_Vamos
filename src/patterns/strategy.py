@@ -1,5 +1,3 @@
-# patterns/strategy.py
-
 import json
 import random
 

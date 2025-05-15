@@ -1,14 +1,14 @@
 import argparse
-from scr.controllers.cli_controller import CLIController
-from scr.ui.gradio_app import GradioApp
-from scr.controllers.ui_controller import UIController
-from scr.services.poll_service import PollService
-from scr.services.chatbot_service import ChatbotService
-from scr.services.nft_service import NFTService
-from scr.repositories.poll_repository import PollRepository
-from scr.repositories.user_repository import UserRepository
-from scr.repositories.nft_repository import NFTRepository
-from scr.patterns.strategy import AlphabeticalTieBreaker
+from src.controllers.cli_controller import CLIController
+from src.ui.gradio_app import GradioApp
+from src.controllers.ui_controller import UIController
+from src.services.poll_service import PollService
+from src.services.chatbot_service import ChatbotService
+from src.services.nft_service import NFTService
+from src.repositories.poll_repository import PollRepository
+from src.repositories.user_repository import UserRepository
+from src.repositories.nft_repository import NFTRepository
+from src.patterns.strategy import AlphabeticalTieBreaker
 
 def main():
     # Configuración de servicios y repositorios
