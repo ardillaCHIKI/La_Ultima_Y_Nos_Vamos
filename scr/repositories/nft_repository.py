@@ -19,13 +19,9 @@ class NFTRepository:
             with open(self.json_path, 'r') as file:
                 data = json.load(file)
         except FileNotFoundError:
-            data = {}
+            data = []
 
-        data[token.token_id] = {
-            "poll_id": token.poll_id,
-            "option": token.option,
-            "owner_id": token.owner_id
-        }
+        data.append(token.__dict__)
 
         with open(self.json_path, 'w') as file:
             json.dump(data, file, indent=4)

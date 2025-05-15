@@ -1,9 +1,10 @@
-# src/models/token_nft.py
 import uuid
+from datetime import datetime
 
 class TokenNFT:
-    def __init__(self, poll_id: str, option: str, owner_id: str):
+    def __init__(self, owner: str, poll_id: str, option: str):
         self.token_id = str(uuid.uuid4())
+        self.owner = owner
         self.poll_id = poll_id
         self.option = option
-        self.owner_id = owner_id
+        self.issued_at = datetime.now().isoformat()
