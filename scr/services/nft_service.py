@@ -1,7 +1,12 @@
 from models.token_nft import TokenNFT
 from repositories.nft_repository import NFTRepository
+from patterns.observer import Observer
 
-class NFTService:
+class NFTService(Observer):
+    def update(self, event: str, data: dict):
+        if event == "poll_closed":
+            print(f"NFTService: Se ha cerrado la encuesta {data['poll_id']}, procesando tokens.")
+    
     def __init__(self, nft_repository: NFTRepository):
         self.nft_repository = nft_repository
 

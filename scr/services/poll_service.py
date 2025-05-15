@@ -1,9 +1,11 @@
-from models.poll import Poll
+# src/services/poll_service.py
 from repositories.poll_repository import PollRepository
-from datetime import datetime
+from models.poll import Poll
+from patterns.observer import Subject
 
-class PollService:
+class PollService(Subject):
     def __init__(self, poll_repository: PollRepository):
+        super().__init__()
         self.poll_repository = poll_repository
         self.polls = {}
 
@@ -23,5 +25,8 @@ class PollService:
         if poll_id in self.polls:
             self.polls[poll_id].close_poll()
             self.poll_repository.save_poll(self.polls[poll_id])
+            # Notificar a los observadores cuando la encuesta se cierra
+            self.notify_observers("poll_closed", {"poll_id": poll_id})
         else:
             raise ValueError("Encuesta no encontrada.")
+
