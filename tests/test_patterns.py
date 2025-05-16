@@ -1,6 +1,6 @@
 import pytest
 from src.patterns.observer import Subject, Observer
-from src.patterns.poll_factory import PollFactory
+from src.patterns.factory import PollFactory
 from src.models.poll_multiple import PollMultiple
 from src.patterns.strategy import AlphabeticalTieBreaker, RandomTieBreaker
 
