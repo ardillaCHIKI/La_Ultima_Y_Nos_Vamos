@@ -1,42 +1,80 @@
 import json
-import sqlite3
-from models.user import User
+import os
+from threading import Lock
+from src.models.usuario import User
+from datetime import datetime
 
-class UserRepository:
-    def __init__(self, storage_type='json', db_path='data/users.db', json_path='data/users.json'):
+class UsuarioRepository:
+    def __init__(self, storage_path, storage_type):
+        self.storage_path = storage_path
         self.storage_type = storage_type
-        self.db_path = db_path
-        self.json_path = json_path
+        self.users_file = os.path.join(self.storage_path, "users.json")
+        self.lock = Lock()  # Añadir candado
+        self._initialize_storage()
 
-    def save_user(self, user: User):
-        if self.storage_type == 'json':
-            self._save_user_json(user)
-        elif self.storage_type == 'sqlite':
-            self._save_user_sqlite(user)
+    def _initialize_storage(self):
+        if self.storage_type != "json":
+            raise NotImplementedError("Solo se soporta almacenamiento JSON por ahora.")
+        with self.lock:
+            if not os.path.exists(self.users_file):
+                with open(self.users_file, "w") as f:
+                    json.dump([], f)
 
-    def _save_user_json(self, user: User):
-        try:
-            with open(self.json_path, 'r') as file:
-                data = json.load(file)
-        except FileNotFoundError:
-            data = {}
+    def save_user(self, user):
+        with self.lock:
+            print(f"Guardando usuario {user.username} en users.json")
+            with open(self.users_file, "r") as f:
+                users = json.load(f)
+            user_data = {
+                "username": user.username,
+                "password_hash": user.password_hash,
+                "session_token": user.session_token,
+                "tokens": user.tokens
+            }
+            for i, existing_user in enumerate(users):
+                if existing_user["username"] == user.username:
+                    users[i] = user_data
+                    break
+            else:
+                users.append(user_data)
+            with open(self.users_file, "w") as f:
+                json.dump(users, f, indent=2)
+            print(f"Usuario {user.username} guardado con tokens: {user.tokens}")
 
-        data[user.username] = {"password_hash": user.password_hash, "tokens": [t.token_id for t in user.tokens]}
+    def get_user(self, username):
+        with self.lock:
+            with open(self.users_file, "r") as f:
+                users = json.load(f)
+            for user_data in users:
+                if user_data["username"] == username:
+                    user = User(
+                        username=user_data["username"],
+                        password="",
+                        session_token=user_data.get("session_token"),
+                        tokens=user_data.get("tokens", [])
+                    )
+                    user.password_hash = user_data["password_hash"]
+                    return user
+            return None
 
-        with open(self.json_path, 'w') as file:
-            json.dump(data, file, indent=4)
+    def user_exists(self, username):
+        with self.lock:
+            with open(self.users_file, "r") as f:
+                users = json.load(f)
+            return any(user["username"] == username for user in users)
 
-    def _save_user_sqlite(self, user: User):
-        conn = sqlite3.connect(self.db_path)
-        cursor = conn.cursor()
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS users (
-                username TEXT PRIMARY KEY,
-                password_hash TEXT,
-                tokens TEXT
-            )
-        """)
-        cursor.execute("INSERT OR REPLACE INTO users VALUES (?, ?, ?)",
-                       (user.username, user.password_hash, json.dumps([t.token_id for t in user.tokens])))
-        conn.commit()
-        conn.close()
+    def get_all_users(self):
+        with self.lock:
+            with open(self.users_file, "r") as f:
+                users = json.load(f)
+            result = []
+            for user_data in users:
+                user = User(
+                    username=user_data["username"],
+                    password="",
+                    session_token=user_data.get("session_token"),
+                    tokens=user_data.get("tokens", [])
+                )
+                user.password_hash = user_data["password_hash"]
+                result.append(user)
+            return result
