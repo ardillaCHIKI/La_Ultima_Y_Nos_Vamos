@@ -1,8 +1,8 @@
 import pytest
 from datetime import datetime, timedelta
-from src.models.encuesta import Poll
-from src.models.voto import Vote
-from src.repositories.encuesta_repository import EncuestaRepository
+from src.models.poll import Poll
+from src.models.vote import Vote
+from src.repositories.poll_repository import EncuestaRepository
 from src.services.poll_service import PollService
 from src.patterns.factory import SimplePollFactory
 

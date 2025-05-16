@@ -1,7 +1,7 @@
 import pytest
 from src.models.token_nft import TokenNFT
 from src.repositories.nft_repository import NFTRepository
-from src.repositories.usuario_repository import UsuarioRepository
+from src.repositories.user_repository import UsuarioRepository
 from src.services.nft_service import NFTService
 from src.services.user_service import UserService
 

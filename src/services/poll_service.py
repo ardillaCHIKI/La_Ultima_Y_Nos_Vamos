@@ -1,5 +1,5 @@
 from src.strategies.vote_strategy import DefaultVoteStrategy
-from src.models.voto import Vote
+from src.models.vote import Vote
 
 class PollService:
     def __init__(self, encuesta_repository, poll_factory=None, vote_strategy=None, nft_service=None):

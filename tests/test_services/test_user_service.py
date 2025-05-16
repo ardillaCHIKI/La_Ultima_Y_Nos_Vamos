@@ -1,6 +1,6 @@
 import pytest
-from src.models.usuario import User
-from src.repositories.usuario_repository import UsuarioRepository
+from src.models.user import User
+from src.repositories.user_repository import UsuarioRepository
 from src.services.user_service import UserService
 
 @pytest.fixture

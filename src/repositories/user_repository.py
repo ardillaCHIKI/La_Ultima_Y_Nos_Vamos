@@ -1,7 +1,7 @@
 import json
 import os
 from threading import Lock
-from src.models.usuario import User
+from src.models.user import User
 from datetime import datetime
 
 class UsuarioRepository:

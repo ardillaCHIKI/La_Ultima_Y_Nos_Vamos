@@ -1,6 +1,6 @@
 import pytest
 from datetime import datetime
-from src.models.voto import Vote
+from src.models.vote import Vote
 
 def test_create_vote():
     """Prueba la creación de un voto."""

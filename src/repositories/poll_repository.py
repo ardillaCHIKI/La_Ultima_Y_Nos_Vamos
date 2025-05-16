@@ -1,7 +1,7 @@
 import json
 import os
-from src.models.encuesta import Poll
-from src.models.voto import Vote
+from src.models.poll import Poll
+from src.models.vote import Vote
 from datetime import datetime
 
 class EncuestaRepository:

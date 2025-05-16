@@ -1,5 +1,5 @@
 import pytest
-from src.models.usuario import User
+from src.models.user import User
 
 def test_create_user():
     """Prueba la creación de un usuario."""

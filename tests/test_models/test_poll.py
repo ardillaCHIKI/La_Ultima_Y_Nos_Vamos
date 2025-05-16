@@ -1,6 +1,6 @@
 import pytest
 from datetime import datetime, timedelta
-from src.models.encuesta import Poll
+from src.models.poll import Poll
 
 # Fixture para crear una encuesta base
 @pytest.fixture

@@ -1,7 +1,7 @@
 import pytest
 import os
-from src.models.usuario import User
-from src.repositories.usuario_repository import UsuarioRepository
+from src.models.user import User
+from src.repositories.user_repository import UsuarioRepository
 
 @pytest.fixture
 def usuario_repo(tmpdir):

@@ -1,54 +1,56 @@
 import pytest
 import os
 from datetime import datetime
-from src.models.token_nft import TokenNFT
-from src.repositories.nft_repository import NFTRepository
+from src.models.poll import Poll
+from src.models.vote import Vote
+from src.repositories.poll_repository import EncuestaRepository
 
 @pytest.fixture
-def nft_repo(tmpdir):
+def encuesta_repo(tmpdir):
     """Crea un repositorio temporal para las pruebas."""
     storage_path = str(tmpdir)
-    return NFTRepository(storage_path, "json")
+    return EncuestaRepository(storage_path, "json")
 
-def test_save_and_get_nft(nft_repo):
-    """Prueba guardar y recuperar un token NFT."""
-    token = TokenNFT("poll1", "Opción 1", "user1")
-    nft_repo.save_nft(token)
-    retrieved_token = nft_repo.get_nft(token.token_id)
-    assert retrieved_token.token_id == token.token_id
-    assert retrieved_token.poll_id == token.poll_id
-    assert retrieved_token.option == token.option
-    assert retrieved_token.owner == token.owner
-    assert retrieved_token.issued_at == token.issued_at
+def test_save_and_get_poll(encuesta_repo):
+    """Prueba guardar y recuperar una encuesta."""
+    poll = Poll(None, "Pregunta", ["Opción 1", "Opción 2"], 60, poll_type="simple")
+    poll.add_vote("user1", "Opción 1")
+    encuesta_repo.save_poll(poll)
+    retrieved_poll = encuesta_repo.get_poll(poll.poll_id)
+    assert retrieved_poll.poll_id == poll.poll_id
+    assert retrieved_poll.question == poll.question
+    assert retrieved_poll.options == poll.options
+    assert retrieved_poll.votes == poll.votes
+    assert retrieved_poll.poll_type == poll.poll_type
+    assert retrieved_poll.status == poll.status
+    assert retrieved_poll.duration_seconds == poll.duration_seconds
+    assert retrieved_poll.timestamp_start == poll.timestamp_start
 
-def test_get_nfts_by_owner(nft_repo):
-    """Prueba recuperar tokens NFT por propietario."""
-    token1 = TokenNFT("poll1", "Opción 1", "user1")
-    token2 = TokenNFT("poll2", "Opción 2", "user1")
-    token3 = TokenNFT("poll3", "Opción 3", "user2")
-    nft_repo.save_nft(token1)
-    nft_repo.save_nft(token2)
-    nft_repo.save_nft(token3)
-    user1_tokens = nft_repo.get_nfts_by_owner("user1")
-    assert len(user1_tokens) == 2
-    assert any(token.token_id == token1.token_id for token in user1_tokens)
-    assert any(token.token_id == token2.token_id for token in user1_tokens)
+def test_save_and_get_vote(encuesta_repo):
+    """Prueba guardar y recuperar un voto."""
+    vote = Vote("poll1", "user1", "Opción 1")
+    encuesta_repo.save_vote(vote)
+    votes = encuesta_repo.get_votes_for_poll("poll1")
+    assert len(votes) == 1
+    assert votes[0].poll_id == "poll1"
+    assert votes[0].username == "user1"
+    assert votes[0].option == "Opción 1"
+    assert votes[0].timestamp == vote.timestamp
 
-def test_transfer_nft(nft_repo):
-    """Prueba transferir un token NFT a otro usuario."""
-    token = TokenNFT("poll1", "Opción 1", "user1")
-    nft_repo.save_nft(token)
-    nft_repo.transfer_nft(token.token_id, "user2")
-    retrieved_token = nft_repo.get_nft(token.token_id)
-    assert retrieved_token.owner == "user2"
+def test_has_user_voted(encuesta_repo):
+    """Prueba verificar si un usuario ha votado."""
+    vote = Vote("poll1", "user1", "Opción 1")
+    encuesta_repo.save_vote(vote)
+    assert encuesta_repo.has_user_voted("poll1", "user1")
+    assert not encuesta_repo.has_user_voted("poll1", "user2")
 
-def test_get_all_nfts(nft_repo):
-    """Prueba recuperar todos los tokens NFT."""
-    token1 = TokenNFT("poll1", "Opción 1", "user1")
-    token2 = TokenNFT("poll2", "Opción 2", "user2")
-    nft_repo.save_nft(token1)
-    nft_repo.save_nft(token2)
-    tokens = nft_repo.get_all_nfts()
-    assert len(tokens) == 2
-    assert any(token.token_id == token1.token_id for token in tokens)
-    assert any(token.token_id == token2.token_id for token in tokens)
+def test_get_all_polls(encuesta_repo):
+    """Prueba recuperar todas las encuestas."""
+    poll1 = Poll(None, "Pregunta 1", ["Opción 1", "Opción 2"], 60, poll_type="simple")
+    poll2 = Poll(None, "Pregunta 2", ["Opción A", "Opción B"], 60, poll_type="multiple")
+    encuesta_repo.save_poll(poll1)
+    encuesta_repo.save_poll(poll2)
+    polls = encuesta_repo.get_all_polls()
+    assert len(polls) == 2
+    assert any(poll.poll_id == poll1.poll_id for poll in polls)
+    assert any(poll.poll_id == poll2.poll_id for poll in polls)

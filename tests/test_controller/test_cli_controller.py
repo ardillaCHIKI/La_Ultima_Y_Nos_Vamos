@@ -6,8 +6,8 @@ from src.services.poll_service import PollService
 from src.services.user_service import UserService
 from src.services.nft_service import NFTService
 from src.services.chatbot_service import ChatbotService
-from src.repositories.encuesta_repository import EncuestaRepository
-from src.repositories.usuario_repository import UsuarioRepository
+from src.repositories.poll_repository import EncuestaRepository
+from src.repositories.user_repository import UsuarioRepository
 from src.repositories.nft_repository import NFTRepository
 from src.patterns.factory import SimplePollFactory
 

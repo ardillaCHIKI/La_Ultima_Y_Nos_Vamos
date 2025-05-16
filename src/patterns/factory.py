@@ -1,4 +1,4 @@
-from src.models.encuesta import Poll
+from src.models.poll import Poll
 
 class SimplePollFactory:
     def create_poll(self, poll_id, question, options, duration_seconds, poll_type="simple"):
