@@ -10,6 +10,15 @@ from src.repositories.user_repository import UserRepository
 from src.repositories.nft_repository import NFTRepository
 from src.patterns.strategy import AlphabeticalTieBreaker
 
+from pymongo import MongoClient
+
+# Reemplaza <db_password> con tu contraseña
+client = MongoClient("mongodb+srv://ardillachiki:P2nID1hMkaHnvWCS@cluster0.vu042y2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+
+# Acceder a la base de datos
+db = client.test
+print("Conexión exitosa")
+
 def main():
     # Configuración de servicios y repositorios
     poll_repository = PollRepository(storage_type='json')
