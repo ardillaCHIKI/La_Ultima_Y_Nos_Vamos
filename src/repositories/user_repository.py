@@ -4,7 +4,7 @@ from threading import Lock
 from src.models.user import User
 from datetime import datetime
 
-class UsuarioRepository:
+class UserRepository:
     def __init__(self, storage_path, storage_type):
         self.storage_path = storage_path
         self.storage_type = storage_type

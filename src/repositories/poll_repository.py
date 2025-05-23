@@ -4,7 +4,7 @@ from src.models.poll import Poll
 from src.models.vote import Vote
 from datetime import datetime
 
-class EncuestaRepository:
+class PollRepository:
     def __init__(self, storage_path, storage_type):
         self.storage_path = storage_path
         self.storage_type = storage_type
