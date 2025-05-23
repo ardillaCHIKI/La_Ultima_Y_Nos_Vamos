@@ -1,7 +1,7 @@
 import argparse
 from src.controllers.cli_controller import CLIController
-from src.ui.gradio_app import GradioApp
-from src.controllers.ui_controller import UIController
+from src.ui.gradio_app import GradioUI
+from src.controllers.cli_controller import UIController
 from src.services.poll_service import PollService
 from src.services.chatbot_service import ChatbotService
 from src.services.nft_service import NFTService
@@ -32,7 +32,7 @@ def main():
 
     if args.ui:
         print("Iniciando interfaz gráfica con Gradio...")
-        app_ui = GradioApp(ui_controller)
+        app_ui = GradioUI(ui_controller)
         app_ui.launch()
     else:
         print("Iniciando controlador CLI...")
